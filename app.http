@@ -1,0 +1,15 @@
+
+GET http://localhost:5000/home
+
+###
+
+POST http://localhost:5000/create/
+Content-Type: application/json
+
+{
+    "Id":7,
+    "name":"Keerthi",
+    "role":"Junior Assist"
+}
+
+###
