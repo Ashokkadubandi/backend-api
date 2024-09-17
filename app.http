@@ -1,15 +1,23 @@
 
-GET http://localhost:5000/home
+GET http://localhost:5000/userDetails
 
 ###
 
-POST http://localhost:5000/create/
+POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "Id":7,
-    "name":"Keerthi",
-    "role":"Junior Assist"
+    "username":"Ashok",
+    "gender":"Male",
+    "password":"ashok@2024"
 }
 
 ###
+
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username":"Ashok",
+    "password":"ashok@2024"
+}
