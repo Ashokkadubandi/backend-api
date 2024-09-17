@@ -1,9 +1,11 @@
 
-GET http://localhost:5000/userDetails
+GET http://localhost:8000/userDetails
 
 ###
 
-POST http://localhost:5000/register
+
+# https://backend-api-1-ebqt.onrender.com/userDetails
+POST http://localhost:8000/register
 Content-Type: application/json
 
 {
@@ -14,7 +16,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/login
+POST http://localhost:8000/login
 Content-Type: application/json
 
 {

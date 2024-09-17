@@ -9,6 +9,7 @@ const dbPath = path.join(__dirname, "userData.db");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 let db = null;
+let port = process.env.PORT || 8000;
 
 const initializeDbAndServer = async () => {
   try {
@@ -17,8 +18,8 @@ const initializeDbAndServer = async () => {
       driver: sqlite3.Database,
     });
 
-    app.listen(5000, () => {
-      console.log(`server running at http://localhost:5000`);
+    app.listen(8000, () => {
+      console.log(`server running at http://localhost:${port}`);
     });
   } catch (error) {
     console.log(`DB Error at ${error.message}`);
