@@ -8,6 +8,7 @@ const path = require("path");
 const dbPath = path.join(__dirname, "userData.db");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
+const jwt = require("jsonwebtoken");
 let db = null;
 let port = process.env.PORT || 8000;
 
@@ -30,10 +31,28 @@ initializeDbAndServer();
 app.use(express.json());
 
 //GET API method
-app.get("/userDetails", async (request, response) => {
-  const query = `select * from userInfo`;
-  const data = await db.all(query);
-  response.send(data);
+app.get("/movies", async (request, response) => {
+  let jwtToken;
+  const authHeader = request.headers["authorization"];
+  if (authHeader !== undefined) {
+    jwtToken = authHeader.split(" ")[1];
+  }
+  if (jwtToken === undefined) {
+    response.status(401);
+    response.send({ Error: "Invalid Access Token" });
+  } else {
+    jwt.verify(jwtToken, "secret_key", async (error, user) => {
+      if (error) {
+        response.status(401);
+        response.send({ Error: "Invalid Access Token" });
+      } else {
+        const query = `select * from movies`;
+        const data = await db.all(query);
+        const movie_data = [{ movies: data }];
+        response.send(movie_data);
+      }
+    });
+  }
 });
 
 //POST Register API method
@@ -68,7 +87,9 @@ app.post("/login", async (request, response) => {
   } else {
     const isMatch = await bcrypt.compare(password, getData.password);
     if (isMatch === true) {
-      response.send(["Login Success"]);
+      const payload = { username: username };
+      const token = jwt.sign(payload, "secret_key");
+      response.send([{ jwt_token: token }]);
     } else {
       response.status(400);
       response.send(["Invalid Password"]);

@@ -1,5 +1,6 @@
 
-GET http://localhost:8000/userDetails
+GET http://localhost:8000/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFzaG9rIiwiaWF0IjoxNzI2NjU2MDc1fQ.pTJl2ijJwwHysdmqSxUqnmLcyf4piBF1unDho6sUq04
 
 ###
 
