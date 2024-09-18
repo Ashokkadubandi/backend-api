@@ -50,10 +50,10 @@ app.post("/register", async (request, response) => {
           values('${id}','${username}','${gender}','${encrypted}')
       `;
     await db.run(query);
-    response.send("Successfully Registered");
+    response.send(["Successfully Registered"]);
   } else {
     response.status(400);
-    response.send("User already exists");
+    response.send(["User already exists"]);
   }
 });
 
