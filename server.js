@@ -64,14 +64,14 @@ app.post("/login", async (request, response) => {
   const getData = await db.get(getQuery);
   if (getData === undefined) {
     response.status(400);
-    response.send("Invalid User");
+    response.send(["Invalid User"]);
   } else {
     const isMatch = await bcrypt.compare(password, getData.password);
     if (isMatch === true) {
-      response.send("Login Success");
+      response.send(["Login Success"]);
     } else {
       response.status(400);
-      response.send("Invalid Password");
+      response.send(["Invalid Password"]);
     }
   }
 });
